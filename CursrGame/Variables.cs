@@ -3,35 +3,32 @@
     public class NPC
     {
         public int NpcHealth { get; set; }
-        public int Npcattack { get; set; }
+        public int NpcAttack { get; set; }
+
+        private static readonly Random Random = new();
+
         public NPC()
         {
-            Random random = new();
-            Npcattack = random.Next(1, 25);
-            NpcHealth = random.Next(1, 150);
+            NpcAttack = Random.Next(1, 25);
+            NpcHealth = Random.Next(1, 150);
         }
     }
+
     public class Player
     {
-
-        public int Plrhealth { get; set; }
-        public int Plrattack { get; set; }
-        public int Gold { get; set; }
-        public int Kills { get; set; }
-        public int Level { get; set; }
-        public int Exp { get; set; }
+        public int PlrAttack { get; set; } = 13;
+        public int PlrHealth { get; set; } = 100;
+        public int Gold { get; set; } = 999;
+        public int Kills { get; set; } = 0;
+        public int Level { get; set; } = 1;
+        public int Exp { get; set; } = 0;
         public int GiveGold { get; set; }
+
+        private static readonly Random Random = new();
 
         public Player()
         {
-            Random random = new();
-            Plrattack = 13;
-            Plrhealth = 100;
-            Gold = 999;
-            Kills = 0;
-            Level = 1;
-            Exp = 0;
-            GiveGold = random.Next(10, 150);
+            GiveGold = Random.Next(10, 150);
         }
 
         public void GainExperience(int amount)
@@ -41,11 +38,11 @@
             while (Exp >= GetExperienceNeededForLevel(Level + 1))
             {
                 Level++;
-                Console.WriteLine("You leveled up! You are now level " + Level);
+                Console.WriteLine($"You leveled up! You are now level {Level}");
             }
         }
 
-        public static int GetExperienceNeededForLevel(int level)
+        private int GetExperienceNeededForLevel(int level)
         {
             return (int)(100 * Math.Pow(level, 1.5));
         }

@@ -53,34 +53,37 @@ class Program
 
         menu.MainMenu(player, npc);
 
+        // VARIABLES
+        int dodgeChance = random.Next(0, 100);
+
         while (true)
         {
-            var command = CustomReadLine.ReadLine();
+            var command = CustomReadLine.ReadLine().ToLower();
 
-            if (command == "attack" || command == "Attack")
+            if (command == "attack")
             {
 
                 IsInCombat = true;
-                Console.WriteLine("\nYou attack the enemy for " + player.Plrattack + " damage!");
-                npc.NpcHealth -= player.Plrattack;
+                Console.WriteLine($"\nYou attack the enemy for {player.PlrAttack} damage!");
+                npc.NpcHealth -= player.PlrAttack;
 
-                if (random.Next(0, 100) < 15)
+                if (dodgeChance < 15)
                 {
                     Console.WriteLine("You dodged the enemy attack!");
                 }
                 else
                 {
-                    Console.WriteLine("The enemy attacks you for " + npc.Npcattack + " damage!");
-                    player.Plrhealth -= npc.Npcattack;
+                    Console.WriteLine($"The enemy attacks you for {npc.NpcAttack} damage!");
+                    player.PlrHealth -= npc.NpcAttack;
                 }
 
-                Console.WriteLine("\nYou have " + player.Plrhealth + " HP left!");
-                Console.WriteLine("The enemy has " + npc.NpcHealth + " HP left!\n");
+                Console.WriteLine($"\nYou have {player.PlrHealth} HP left!");
+                Console.WriteLine($"The enemy has {npc.NpcHealth} HP left!\n");
 
                 if (npc.NpcHealth <= 0)
                 {
                     Console.WriteLine("You win for now...\n");
-                    player.Kills += 1;
+                    player.Kills++;
                     player.Gold += player.GiveGold;
                     player.GainExperience(random.Next(2, 100));
                     IsInCombat = false;
@@ -98,7 +101,7 @@ class Program
                         break;
                     }
                 }
-                else if (player.Plrhealth <= 0)
+                else if (player.PlrHealth <= 0)
                 {
                     Console.WriteLine("You lost hahaahahah");
                     IsInCombat = false;
@@ -106,9 +109,9 @@ class Program
                     var choice = Console.ReadLine();
                     if (choice == "y")
                     {
-                        player.Plrhealth = 100;
-                        Console.WriteLine("Your enemy has " + npc.NpcHealth + "HP and " + npc.Npcattack + " Attack");
-                        Console.WriteLine("You have " + player.Plrhealth + "...again");
+                        player.PlrHealth = 100;
+                        Console.WriteLine($"Your enemy has { npc.NpcHealth} HP and {npc.NpcAttack} Attack");
+                        Console.WriteLine($"You have {player.PlrHealth} ...again");
                     }
                     else
                     {
@@ -117,7 +120,7 @@ class Program
                     }
                 }
             }
-            else if (command == "quit" || command == "Quit")
+            else if (command == "quit")
             {
                 Console.Clear();
                 Console.WriteLine("You quit");
@@ -125,15 +128,15 @@ class Program
                 break;
             }
 
-            else if (command == "help" || command == "Help")
+            else if (command == "help")
             {
                 Console.WriteLine("Commands: attack, quit, help, shop");
             }
-            if ((command == "shop" || command == "Shop") && IsInCombat == true)
+            if (command == "shop" && IsInCombat == true)
             {
                 Console.WriteLine("You cannot access the shop while in combat!");
             }
-            else if ((command == "shop" || command == "Shop") && IsInCombat == false)
+            else if (command == "shop" && IsInCombat == false)
             {
                 menu.Shop(player, npc);
 

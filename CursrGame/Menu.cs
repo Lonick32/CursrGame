@@ -5,15 +5,20 @@
         private Player? player;
         private NPC? npc;
 
+        private void PrintStats()
+        {
+            Console.WriteLine($"You are Level {player.Level}");
+            Console.WriteLine($"You have: {player.PlrHealth} HP, {player.PlrAttack} Attack and {player.Kills} Kills");
+            Console.WriteLine($"Your enemy has: {npc.NpcHealth} HP and {npc.NpcAttack} Attack \n");
+        }
+
         public void MainMenu(Player player, NPC npc)
         {
             this.player = player;
             this.npc = npc;
 
             Console.Clear();
-            Console.WriteLine("You are Level " + player.Level);
-            Console.WriteLine("You have: " + player.Plrhealth + " HP, " + player.Plrattack + " Attack and " + player.Kills + " Kills");
-            Console.WriteLine("Your enemy has: " + npc.NpcHealth + "HP and " + npc.Npcattack + " Attack \n");
+            PrintStats();
         }
 
         public void Shop(Player player, NPC npc)
@@ -25,7 +30,7 @@
             Console.WriteLine("=====================================");
             Console.WriteLine("                SHOP                 ");
             Console.WriteLine("=====================================");
-            Console.WriteLine("You have " + player.Gold + " Gold");
+            Console.WriteLine($"You have {player.Gold} Gold");
             Console.WriteLine("1. Health Potion - 25 Gold");
             Console.WriteLine("2. Sword - 125 Gold");
             Console.WriteLine("\nType LEAVE to leave the shop.");
@@ -46,9 +51,9 @@
                         if (player.Gold >= 10)
                         {
                             Console.WriteLine("You bought a health potion!");
-                            player.Plrhealth += 10;
+                            player.PlrHealth += 10;
                             player.Gold -= 10;
-                            Console.WriteLine("You have " + player.Gold + " Gold    ");
+                            Console.WriteLine($"You have {player.Gold} Gold");
                         }
                         else
                         {
@@ -59,9 +64,9 @@
                         if (player.Gold >= 125)
                         {
                             Console.WriteLine("You bought a Sword");
-                            player.Plrattack += 25;
+                            player.PlrAttack += 25;
                             player.Gold -= 125;
-                            Console.WriteLine("You have " + player.Gold + " Gold    ");
+                            Console.WriteLine($"You have {player.Gold} Gold");
                         }
                         else
                         {
@@ -70,7 +75,7 @@
                         break;
                     case "info 1":
                         {
-                            Console.WriteLine(""" 
+                            Console.WriteLine(@" 
                                           _____
                                          `.___,'
                                           (___)
@@ -84,13 +89,13 @@
                                        :         ;
                                         \       /
                                          `.___.' 
-                                       """);
+                                       ");
                             Console.WriteLine("+ Restores 10 HP");
                         }
                         break;
                     case "info 2":
                         {
-                            Console.WriteLine("\n" + """ 
+                            Console.WriteLine($@" 
                                                   />
                                     ()          //---------------------------------------------------------(
                                    (*)OXOXOXOXO(*>                                                          \
