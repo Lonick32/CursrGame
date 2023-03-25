@@ -1,5 +1,4 @@
-﻿using Cursrbutincsharp;
-using CursrGame;
+﻿using CursrGame;
 
 class Program
 {
@@ -7,7 +6,7 @@ class Program
     {
         bool isRunning = true;
 
-        Thread inputThread = new Thread(() =>
+        Thread inputThread = new(() =>
         {
             while (isRunning)
             {
@@ -45,15 +44,15 @@ class Program
         inputThread.Join();
         Console.Clear();
 
-        Random random = new Random();
-        Player player = new Player();
-        Menu menu = new Menu();
-        NPC npc = new NPC();
+        Random random = new();
+        Player player = new();
+        NPC npc = new();
+        Menu menu = new();
 
         bool IsInCombat = false;
 
 
-        menu.MainMenu();
+        menu.MainMenu(player, npc);
 
 
         while (true)
@@ -64,7 +63,7 @@ class Program
             {
 
                 IsInCombat = true;
-                Console.WriteLine("You attack the enemy for " + player.Plrattack + " damage!");
+                Console.WriteLine("\nYou attack the enemy for " + player.Plrattack + " damage!");
                 npc.NpcHealth -= player.Plrattack;
 
                 if (random.Next(0, 100) < 15)
@@ -77,21 +76,22 @@ class Program
                     player.Plrhealth -= npc.Npcattack;
                 }
 
-                Console.WriteLine("\nThe enemy has " + npc.NpcHealth + " HP left!");
-                Console.WriteLine("You have " + player.Plrhealth + " HP left!");
+                Console.WriteLine("\nYou have " + player.Plrhealth + " HP left!");
+                Console.WriteLine("The enemy has " + npc.NpcHealth + " HP left!\n");
 
                 if (npc.NpcHealth <= 0)
                 {
                     Console.WriteLine("You win for now...\n");
                     player.Kills += 1;
                     player.Gold += player.GiveGold;
+                    player.GainExperience(random.Next(2, 100));
                     IsInCombat = false;
                     Console.Write("Do you want to try again? (y/n): ");
                     var choice = Console.ReadLine();
                     if (choice == "y")
                     {
                         npc.NpcHealth = random.Next(1, 150);
-                        menu.MainMenu();
+                        menu.MainMenu(player, npc);
 
                     }
                     else
@@ -136,7 +136,7 @@ class Program
             }
             else if ((command == "shop" || command == "Shop") && IsInCombat == false)
             {
-                menu.Shop();
+                menu.Shop(player, npc);
 
             }
         }
