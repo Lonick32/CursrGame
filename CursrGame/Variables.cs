@@ -25,9 +25,9 @@
         public Player()
         {
             Random random = new();
-            Plrattack = 10;
+            Plrattack = 13;
             Plrhealth = 100;
-            Gold = 999;
+            Gold = 0;
             Kills = 0;
             Level = 1;
             Exp = 0;

@@ -25,8 +25,8 @@
             Console.WriteLine("                SHOP                 ");
             Console.WriteLine("=====================================");
             Console.WriteLine("You have " + player.Gold + " Gold");
-            Console.WriteLine("1. Health Potion - 10 Gold");
-            Console.WriteLine("2. Sword - 30 Gold");
+            Console.WriteLine("1. Health Potion - 25 Gold");
+            Console.WriteLine("2. Sword - 125 Gold");
             Console.WriteLine("\nType LEAVE to leave the shop.");
             Console.WriteLine("Type the item's number in order to buy an item");
             Console.WriteLine("Type info and item number in order to see more info about the item\n");
@@ -55,12 +55,11 @@
                         }
                         break;
                     case "2":
-                        if (player.Gold >= 30)
+                        if (player.Gold >= 125)
                         {
-                            Console.WriteLine("You bought a dagger");
+                            Console.WriteLine("You bought a Sword");
                             player.Plrattack += 25;
-                            Console.WriteLine(player.Plrattack);
-                            player.Gold -= 30;
+                            player.Gold -= 125;
                             Console.WriteLine("You have " + player.Gold + " Gold    ");
                         }
                         else
