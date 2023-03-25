@@ -51,9 +51,7 @@ class Program
 
         bool IsInCombat = false;
 
-
         menu.MainMenu(player, npc);
-
 
         while (true)
         {
@@ -123,6 +121,7 @@ class Program
             {
                 Console.Clear();
                 Console.WriteLine("You quit");
+                Thread.Sleep(1000);
                 break;
             }
 

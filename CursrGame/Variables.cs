@@ -27,7 +27,7 @@
             Random random = new();
             Plrattack = 13;
             Plrhealth = 100;
-            Gold = 0;
+            Gold = 999;
             Kills = 0;
             Level = 1;
             Exp = 0;
@@ -45,7 +45,7 @@
             }
         }
 
-        public int GetExperienceNeededForLevel(int level)
+        public static int GetExperienceNeededForLevel(int level)
         {
             return (int)(100 * Math.Pow(level, 1.5));
         }

@@ -15,6 +15,7 @@
             Console.WriteLine("You have: " + player.Plrhealth + " HP, " + player.Plrattack + " Attack and " + player.Kills + " Kills");
             Console.WriteLine("Your enemy has: " + npc.NpcHealth + "HP and " + npc.Npcattack + " Attack \n");
         }
+
         public void Shop(Player player, NPC npc)
         {
             this.player = player;
@@ -39,7 +40,7 @@
                 {
                     case "leave":
                     case "Leave":
-                        MainMenu(player,npc);
+                        MainMenu(player, npc);
                         return;
                     case "1":
                         if (player.Gold >= 10)
